@@ -25,7 +25,7 @@ async function getbackgroundimage(...item) {
 }
 async function getgeocode(city) {
 
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=a7bd35cae1db46af916787d7feb46ca5&pretty=1&no_annotations=1`;
+    const url = `http://api.opencagedata.com/geocode/v1/json?q=${city}&key=a7bd35cae1db46af916787d7feb46ca5&pretty=1&no_annotations=1`;
     const res = await fetch(url);
     const data = await res.json();
     return data;
