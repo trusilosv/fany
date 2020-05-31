@@ -1,0 +1,11 @@
+{
+    "name": "singolo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "script.js",
+    "scripts": {
+        "style": "sass --watch sass/style.scss style.css"
+
+    }
+
+}

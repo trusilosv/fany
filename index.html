@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fancy-weather</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/inquiries.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <script src="js/classweather.js"></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+
+
+</head>
+
+<body>
+    <img class="loding" src="img/loding.gif" alt="loding">
+    <div class="wrapper">
+        <div class="interface">
+            <div class="interface__element search">
+                <input type="text" class="search-input" placeholder="Type to search" />
+                <button class="button search-icon"><span></span></button>
+                <button class="button mic-icon"><span></span></button>
+            </div>
+            <div class="interface__element buttonPonel">
+                <button class="ponel__element updateimg-icon"></button>
+                <select class="ponel__element select">
+                    <option>en</option>
+                    <option>ru</option>
+                    <option>be</option>
+                    <option>ja</option>
+                    <option>uz</option>
+                    <option>lt</option>
+                  </select>
+                <button class="ponel__element button_temperature active">℃</button>
+                <button class="ponel__element button_temperature">℉</button>
+            </div>
+            <div class="interface__element locationData">
+                <div class="locationData__element location">
+                    <div class="location__title location__element">
+                        <P class="city"></P>
+
+                    </div>
+                    <div class="location__when location__element">
+                        <p class="date"></p>
+                        <p class="time"></p>
+                    </div>
+                </div>
+                <div class="locationData__element weather">
+                    <p class="temperature_big"></p>
+                    <div class="weather_description">
+                        <img class="iconweather-big" src="//cdn.weatherapi.com/weather/128x128/day/356.png" alt="icon">
+                        <p class="weather-text"></p>
+                    </div>
+                </div>
+                <div class="locationData__element forecast">
+                    <div class=forecast__element>
+                        <p class="forecast__day"></p>
+                        <div class="forecast_weather">
+                            <img class="forecast__icon" src='' alt=" ">
+                            <p class="forecast__t "></p>
+                        </div>
+                    </div>
+                    <div class=forecast__element>
+                        <p class="forecast__day"></p>
+                        <div class="forecast_weather">
+                            <img class="forecast__icon" src='' alt=" ">
+                            <p class="forecast__t "></p>
+                        </div>
+                    </div>
+                    <div class=forecast__element>
+                        <p class="forecast__day"></p>
+                        <div class="forecast_weather">
+                            <img class="forecast__icon" src='' alt=" ">
+                            <p class="forecast__t"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="locationData__element additionalFunctions">
+                </div>
+            </div>
+            <div class="interface__element mapLocation">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/time.js"></script>
+    <script src="js/search.js "></script>
+    <script src="js/map.js "></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
