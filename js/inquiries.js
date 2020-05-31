@@ -11,7 +11,7 @@ async function getforecast3(city) {
     return data;
 }
 async function getcurrentweather(city) {
-    const url = `http://api.weatherapi.com/v1/current.json?key=2dee1407f7574557a4f172646203005&q=${city}`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=2dee1407f7574557a4f172646203005&q=${city}`;
     const res = await fetch(url);
     const data = await res.json();
     return data;
