@@ -49,9 +49,13 @@ async function translation(str, l1, l2) {
 }
 
 function weatheranalysis(str) {
-    if (str.indexOf('rain')) return 'rain';
-    if (str.indexOf('sun')) return 'sun';
-    if (str.indexOf('storm')) return 'storm';
-    if (str.indexOf('fog')) return 'fog';
-    if (str.indexOf('wind')) return 'wind';
+    if (str.indexOf('cloudy') != -1) return 'cloudy';
+    if (str.indexOf('rain') != -1) return 'rain';
+    if (str.indexOf('sun') != -1) return 'sun';
+    if (str.indexOf('storm') != -1) return 'storm';
+    if (str.indexOf('fog') != -1) return 'fog';
+    if (str.indexOf('wind') != -1) return 'wind';
+    if (str.indexOf('Overcast') != -1) return 'wOvercast';
+    return "nature";
+
 }

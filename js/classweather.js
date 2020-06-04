@@ -70,9 +70,11 @@ class Locality {
     }
     adddom(temperature) {
         document.querySelector('.city').innerHTML = this.title;
-        document.querySelector('.date').innerHTML = this.date.getDate() + '.' + (this.date.getMonth() + 1) + '.' + this.date.getFullYear();
         let time = new Date();
+
         this.date.setMinutes(time.getMinutes());
+        datetime = this.date;
+        document.querySelector('.date').innerHTML = '0' + this.date.getDate() + '.0' + (this.date.getMonth() + 1) + '.' + this.date.getFullYear();
         document.querySelector('.temperature_big').innerHTML = temperatureChange(this.currentweather.temperature, temperature);
         document.querySelector('.iconweather-big').src = this.currentweather.urlIcon;
         document.querySelector('.weather-text').innerHTML = this.description;
