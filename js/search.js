@@ -11,9 +11,7 @@ recognizer.onresult = (event) => {
     speechSynthesis.speak(
         new SpeechSynthesisUtterance(`Ищу погоду в  ${result[0].transcript} `)
     );
-    let loc = new Locality(result[0].transcript);
-    loc.LocalityLoding();
-
+    search();
 }
 recognizer.onend = (event) => {
     if (search_input.value == '') {
@@ -21,10 +19,22 @@ recognizer.onend = (event) => {
         buttom_mic.classList.remove('active');
     }
 }
-recognizer.onerror = () => { speechSynthesis.speak(new SpeechSynthesisUtterance(`Ошибка`)); };
+recognizer.onerror = () => { speechSynthesis.speak(new SpeechSynthesisUtterance(`Ошибка распознования `)); };
 buttom_search.addEventListener('click', () => {});
 
 buttom_mic.addEventListener('click', () => {
     search_input.value = '';
     recognizer.start();
+    buttom_mic.classList.add('active');
 });
+search_input.addEventListener('click', () => search_input.value = '');
+async function search() {
+    let mes = await translation('Invalid request! Repeat', 'en', language);
+    let input = document.querySelector('.search-input');
+    if (input.value.lenght < 2)
+        input.value = mes;
+    let temp = new Locality(input.value);
+    let d = await temp.LocalityLoding(temperature, language);
+    if (d != -1)
+        locat = temp;
+}

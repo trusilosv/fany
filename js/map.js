@@ -13,4 +13,7 @@ function mapfly(x, y) {
         speed: 0.3,
         essential: true
     });
+    var marker = new mapboxgl.Marker()
+    marker.setLngLat([x, y]);
+    marker.addTo(map);
 }
