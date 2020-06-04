@@ -238,6 +238,11 @@ body {
     width: 95%;
   }
 }
+@media (max-width: 400px) {
+  .location__title {
+    font-size: 30px;
+  }
+}
 @keyframes button {
   10% {
     border-width: 10px;
