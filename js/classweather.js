@@ -18,24 +18,22 @@ class Locality {
         this.date = new Date();
         this.day = '';
         this.urlimgs = [];
-        this.language = 'en';
         this.description = '';
     }
-    async LocalityLoding(temperature, language) {
+    async LocalityLoding(temperature) {
         try {
-            let city = await translation(this.inquiry, 'ru', 'en');
-            let place = await getgeocode(city.text[0]);
-            let title = await translation(place.results[0].formatted, 'ru', 'en');
-            this.title = title.text[0];
+            let city = this.inquiry;
+            let place = await getgeocode(city);
+            this.title = place.results[0].formatted;
             this.name = place.results[0].components.city;
             this.coordinates = place.results[0].geometry;
-            let currenwez = await getcurrentweather(this.title);
+            let currenwez = await getcurrentweather(city);
             this.currentweather = new Weather('', currenwez.current.temp_c, currenwez.current.condition.icon, currenwez.current.condition.text +
-                ' FEEL LIKE: ' + currenwez.current.feelslike_c + ' WIND: ' + Math.round(currenwez.current.wind_kph / 3.6) + 'm/c HUMIDITY: ' + currenwez.current.humidity + '%');
+                ' ощущается как: ' + currenwez.current.feelslike_c + '°C Ветер: ' + Math.round(currenwez.current.wind_kph / 3.6) + 'm/c Влажность: ' + currenwez.current.humidity + '%');
             this.date = new Date(currenwez.location.localtime);
             this.description = this.currentweather.description;
             this.day = this.date.toLocaleString('En', { weekday: 'long' });
-            let wez3days = await getforecast3(this.title);
+            let wez3days = await getforecast3(city);
             this.urlimgs = await getbackgroundimage(this.date, this.currentweather);
             this.forecast3day.forEach((currentValue, index) => {
                 let temp = wez3days.forecast.forecastday[index];
@@ -45,42 +43,22 @@ class Locality {
                 currentValue.description = '';
 
             });
-            await this.switchlanguage(temperature, language);
-            switchimg();
+
+            switchimg(emperature);
         } catch { search_input.value = 'Error'; return -1 }
-    }
-    async switchlanguage(temperature, language) {
-        let title = await translation(this.title, this.language, language);
-        this.title = title.text[0];
-        localStorage.setItem('language', language);
-        for (let item of this.forecast3day) {
-            let temp = await translation(item.day, this.language, language);
-            item.day = temp.text[0];
-        }
-        let lat = await translation(this.coordinatesname[0], 'en', language);
-        let long = await translation(this.coordinatesname[1], 'en', language);
-        document.querySelector('.Lat').innerHTML = lat.text[0] + Math.floor(this.coordinates.lat) + '°' + Math.floor((this.coordinates.lat % 1) * 100) + '\'';
-        document.querySelector('.Longi').innerHTML = long.text[0] + Math.floor(this.coordinates.lng) + '°' + Math.floor((this.coordinates.lng % 1) * 100) + '\'';
-        let description = await translation(this.currentweather.description, 'en', language);
-        this.description = description.text[0];
-        let day = await translation(this.day, this.language, language);
-        this.day = day.text[0];
-        this.language = language;
-        this.adddom(temperature);
     }
     adddom(temperature) {
         document.querySelector('.city').innerHTML = this.title;
         let time = new Date();
-
         this.date.setMinutes(time.getMinutes());
         datetime = this.date;
         document.querySelector('.date').innerHTML = '0' + this.date.getDate() + '.0' + (this.date.getMonth() + 1) + '.' + this.date.getFullYear();
         document.querySelector('.temperature_big').innerHTML = temperatureChange(this.currentweather.temperature, temperature);
-        document.querySelector('.iconweather-big').src = this.currentweather.urlIcon;
+        document.querySelector('.iconweather-big').src = this.currentweather.urlIcon.substr(2);
         document.querySelector('.weather-text').innerHTML = this.description;
         document.querySelectorAll('.forecast__element').forEach((el, index) => {
             el.querySelector('.forecast__day').innerHTML = this.forecast3day[index].day;
-            el.querySelector('.forecast__icon').src = this.forecast3day[index].urlIcon;
+            el.querySelector('.forecast__icon').src = this.forecast3day[index].urlIcon.substr(2);
             el.querySelector('.forecast__t ').innerHTML = temperatureChange(this.forecast3day[index].temperature, temperature);
         })
         mapfly(this.coordinates.lng, this.coordinates.lat);

@@ -3,7 +3,7 @@ let search_input = document.querySelector('.search-input');
 let container = document.querySelector('.search-wrapper');
 let buttom_mic = document.querySelector('.mic-icon');
 let buttom_search = document.querySelector('.search-icon')
-recognizer.lang = 'ru-Ru';
+recognizer.lang = 'en-En';
 recognizer.onresult = (event) => {
     let result = event.results[event.resultIndex];
     search_input.value = result[0].transcript;
@@ -29,12 +29,13 @@ buttom_mic.addEventListener('click', () => {
 });
 search_input.addEventListener('click', () => search_input.value = '');
 async function search() {
-    let mes = await translation('Invalid request! Repeat', 'en', language);
+    let mes = 'Invalid request! Repeat';
     let input = document.querySelector('.search-input');
     if (input.value.lenght < 2)
         input.value = mes;
     let temp = new Locality(input.value);
-    let d = await temp.LocalityLoding(temperature, language);
+    let d = await temp.LocalityLoding(temperature);
     if (d != -1)
         locat = temp;
+    temp.adddom(temperature);
 }
