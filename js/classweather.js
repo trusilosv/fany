@@ -54,11 +54,11 @@ class Locality {
         datetime = this.date;
         document.querySelector('.date').innerHTML = '0' + this.date.getDate() + '.0' + (this.date.getMonth() + 1) + '.' + this.date.getFullYear();
         document.querySelector('.temperature_big').innerHTML = temperatureChange(this.currentweather.temperature, temperature);
-        document.querySelector('.iconweather-big').src = this.currentweather.urlIcon.substr(2);
+        document.querySelector('.iconweather-big').src = 'http://' + this.currentweather.urlIcon.substr(2);
         document.querySelector('.weather-text').innerHTML = this.description;
         document.querySelectorAll('.forecast__element').forEach((el, index) => {
             el.querySelector('.forecast__day').innerHTML = this.forecast3day[index].day;
-            el.querySelector('.forecast__icon').src = this.forecast3day[index].urlIcon.substr(2);
+            el.querySelector('.forecast__icon').src = 'http://' + this.forecast3day[index].urlIcon.substr(2);
             el.querySelector('.forecast__t ').innerHTML = temperatureChange(this.forecast3day[index].temperature, temperature);
         })
         mapfly(this.coordinates.lng, this.coordinates.lat);
