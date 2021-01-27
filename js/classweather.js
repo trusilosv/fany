@@ -44,7 +44,7 @@ class Locality {
 
             });
 
-            switchimg(emperature);
+            switchimg();
         } catch { search_input.value = 'Error'; return -1 }
     }
     adddom(temperature) {
